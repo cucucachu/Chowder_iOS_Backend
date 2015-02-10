@@ -23,6 +23,6 @@ Route::any('upload', 'UploadController@upload');
 
 //Route::any('accounts/signUp', 'AccountsController@signUp');
 
-//Route::any('test', 'UploadController@test');
+Route::any('test', 'UploadController@test');
 
 ?>

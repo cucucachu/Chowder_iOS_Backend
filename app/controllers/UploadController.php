@@ -97,6 +97,7 @@ class UploadController extends BaseController {
 	}
 	
 	public function test() {
+		
 		$clam = new Clam;
 		$clam->client_timestamp = "time".rand(0, 100000000);
 		$clam->section_id = 1;
