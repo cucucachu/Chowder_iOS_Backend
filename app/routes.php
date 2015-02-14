@@ -13,39 +13,39 @@
 
 Route::any('/', 'HomeController@index');
 
-Route::group(array('before' => 'auth'), function() {
-
-	Route::any('/ticker', 'DisplayController@ticker');
-
-	Route::any('/latest', 'DisplayController@latest');
-
-});
-
 Route::group(array('prefix' => 'app'), function() {
 	
 	Route::any('upload', 'UploadController@upload');
 	
-	Route::any('login', 'AccountsController@upload');
-	
-	Route::any('upload', 'UploadController@upload');
+	Route::any('login', 'AccountsController@login_app');
+
+	Route::any('logout', 'AccountsController@logout');
 	
 });
 
-
 Route::group(array('prefix' => 'web'), function() {
-
-	Route::any('accounts/logout', 'AccountsController@logout');
-
-	Route::any('accounts/login', 'AccountsController@login');
-
-	Route::any('accounts/loginView', 'AccountsController@loginView');
-
-	Route::any('login', 'AccountsController@loginView');
-
-	Route::any('accounts/new', 'AccountsController@new');
-
-	Route::any('accounts/newView', 'AccountsController@newView');
 	
+	Route::group(array('before' => 'auth'), function() {
+
+		Route::any('/ticker', 'DisplayController@ticker');
+
+		Route::any('/latest', 'DisplayController@latest');
+
+	});
+	
+	Route::group(array('prefix' => 'accounts'), function() {
+
+		Route::any('logout', 'AccountsController@logout');
+
+		Route::any('login', 'AccountsController@login');
+
+		Route::any('loginView', 'AccountsController@login_view');
+
+		Route::any('new', 'AccountsController@new_account');
+
+		Route::any('newView', 'AccountsController@new_view');
+	
+	});
 });
 
 ?>

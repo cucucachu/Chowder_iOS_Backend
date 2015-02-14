@@ -7,4 +7,8 @@ class HomeController extends BaseController {
 		return View::make('home');
 	}
 
+	public function loginView() {
+		return View::make('login');
+	}
+
 }

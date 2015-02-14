@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration {
 			$table->string('email');
 			$table->integer('privilege')->unsigned();
 			$table->string('message');
+			$table->string('remember_token', 100);
 			$table->timestamps();
 		});
 	}

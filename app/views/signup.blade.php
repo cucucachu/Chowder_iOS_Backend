@@ -1,6 +1,10 @@
+@extends('layouts.chowder')
 
-{{ Form::open(array('action' => 'AccountsController@new')) }}
-{{ Form::text('username', 'username') }}
-{{ Form::password('password', 'password') }}
-{{ Form::text('password_again', 'retype password') }}
-{{ Form::close() }}
+@section('content')
+	{{ Form::open(array('action' => 'AccountsController@new_account')) }}
+	Username:        {{ Form::text('username') }}<br>
+	Password:        {{ Form::password('password') }}<br>
+	Retype Password: {{ Form::password('password_again') }}<br>
+	{{ Form::submit('Clam it up') }}
+	{{ Form::close() }}
+@stop

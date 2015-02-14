@@ -20,8 +20,9 @@
 	<div class="menu">
 		<table><tr>
 			<td> {{ HTML::link('/', 'Home') }} </td>
+			<td>{{ HTML::link('web/ticker', 'Live Feed') }}</td>
 			@yield('menu')
-			<td> {{ HTML::link('/accounts/logout', 'Logout') }} </td>
+			<td> {{ HTML::link('/web/accounts/logout', 'Logout') }} </td>
 		</tr></table>
 	</div>
 	<div class="main">
@@ -30,6 +31,10 @@
 			@yield('content')
 			
 		</div>
+
+		@if (isset($msg))
+			{{ $msg }}
+		@endif
 	</div>
 </div>
 

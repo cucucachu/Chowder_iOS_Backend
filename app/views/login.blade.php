@@ -1,11 +1,12 @@
+@extends('layouts.chowder')
 
+@section('content')
+	<h3>Please dive in!</h3><br>
 
-	<form action="/iOS/public/accounts/login" method="post">
-	<label>username: </label><input type="text" name="username"></input><br>
-	<label>password: </label><input type="text" name="password"></input><br>
-	<input type="Submit" value="Submit"></input>
-	</form>
-	@if (isset($msg))
-		{{ $msg }}
-	@endif
+	{{ Form::open(array('url' => '/web/accounts/login')) }}
+	{{ Form::label('Username ') }}{{ Form::text('username') }}<br>
+	{{ Form::label('Password ') }}{{ Form::password('password') }}<br>
+	{{ Form::submit('Dive in') }}<br>
+	{{ Form::close() }}
 
+@stop

@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<head> 
-<link rel="stylesheet" type="text/css" href="/iOS/public/css/default.css">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-</head>
-<body>
-
-<div class="top">
-	<div class="header">
-		<div class="left">
-			<img src="/iOS/public/images/ChowderBackground_320x367.png">
-		</div>
-		<div class="right">
-			<h1>Chowder</h1>
-		</div>
-	</div>
-</div>
-
-<div class="container">	
-	<div class="main">
-		<div class="content">
+@extends('layouts.chowder')
 			
+@section('content')
 			<h1>Live Feed</h1>
 			
 			@if (isset($msg))
@@ -27,22 +8,17 @@
 			@endif		
 			<br>
 			<div id='transects_table'></div>
-			
-		</div>
-	</div>
-</div>
+@stop
 
-</body>
-
-</html>
-
+@section('script')
 <script>
 $(document).ready(function() {
 	update();
 });
 
 function update() {
-	$('#transects_table').load('/iOS/public/latest');
+	$('#transects_table').load('/iOS/public/web/latest');
 	setTimeout(update, 2000);
 }
 </script>
+@stop
