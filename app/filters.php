@@ -43,6 +43,28 @@ Route::filter('auth', function()
 		}
 		return Redirect::guest('login');
 	}
+	
+});
+
+Route::filter('approved', function()
+{
+	if (Auth::user()->privilege > 0)
+	{
+		return Redirect::intended();
+	}
+	else
+		return "Unauthorized";
+	
+});
+
+Route::filter('admin', function()
+{
+	if (Auth::user()->privilege > 1)
+	{
+		return Redirect::intended();
+	}
+	else
+		return "Unauthorized";
 });
 
 

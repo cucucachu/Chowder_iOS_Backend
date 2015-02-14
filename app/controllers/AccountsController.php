@@ -2,33 +2,60 @@
 	
 class AccountsController extends BaseController {
 	
-	public function sign_up() {
+	public function new() {
 		$usr = new User;
 		$usr->username = Input::get('username');
 		$usr->password = Hash::make(Input::get('password'));
 		$usr->save();
 	}
 	
+	public function newView() {
+		return View::make('signup');
+	}
+	
+	
+	
 	public function login() {
-		$username = Input::get('username');
-		$password = Input::get('password');
-		$msg = "Logged in!";
-
-		
-		$user = User::where('username', '=', $username)->get();
-		
-		if ($user == NULL) {
-			$msg = "Unknown User";
-		}
-		/*
-		else {
-			if (!Hash::check($password, $user->password)) {
-				$msg = "Password Incorrect";
+		if (isset($_POST['username']) && isset($_POST['password'])) {
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			echo "login";
+			
+			if (Auth::attempt(array('username' => $username, 'password' => $password)))
+			{
+				return Redirect::action('DisplayController@ticker');
 			}
-		}*/
-		$view = View::make('all');
-		$view->msg = $msg;
-		return $view;
+			else {
+				$view = View::make('login');
+				$view->msg = "Username and/or Password is incorrect";
+				return $view;
+			}
+		}
+	}
+	
+	public function login_device() {
+		if (isset($_POST['username']) && isset($_POST['password'])) {
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			echo "login";
+			
+			if (Auth::attempt(array('username' => $username, 'password' => $password)))
+			{
+				return "Logged in";
+			}
+			else {
+				return = "Username and/or Password is incorrect";
+			}
+		}
+	}
+	
+	public function logout() {
+		Auth::logout();
+		return Redirect::to('/');
+	}
+
+	public function loginView() {
+		return View::make('login');
 	}
 }
 	
