@@ -30,7 +30,7 @@ Route::group(array('prefix' => 'web'), function() {
 		Route::any('/ticker', 'DisplayController@ticker');
 
 		Route::any('/latest', 'DisplayController@latest');
-
+		
 	});
 	
 	Route::group(array('prefix' => 'accounts'), function() {
