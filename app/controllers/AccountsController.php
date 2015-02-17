@@ -43,21 +43,13 @@ class AccountsController extends BaseController {
 	}
 	
 	public function login_app() {
-		if (isset($_POST['username']) && isset($_POST['password'])) {
-			$username = $_POST['username'];
-			$password = $_POST['password'];
-			echo "login";
-			
-			if (Auth::attempt(array('username' => $username, 'password' => $password)))
-			{
-				return "Logged in";
-			}
-			else {
-				return "Username and/or Password is incorrect";
-			}
-		}
+		$username = Input::get('username');
+		$password = Input::get('password');
 		
-		return "Bad Post";
+		if (Auth::attempt(array('username' => $username, 'password' => $password)))
+			return "Logged in";
+		
+		return "Username and/or Password is incorrect. Username: ".$username." Password: ".$password;
 	}
 	
 	public function logout() {
