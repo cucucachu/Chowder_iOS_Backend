@@ -47,9 +47,9 @@ class AccountsController extends BaseController {
 		$password = Input::get('password');
 		
 		if (Auth::attempt(array('username' => $username, 'password' => $password)))
-			return "Logged in";
+			return "true";
 		
-		return "Username and/or Password is incorrect. Username: ".$username." Password: ".$password;
+		return "false";
 	}
 	
 	public function logout() {
