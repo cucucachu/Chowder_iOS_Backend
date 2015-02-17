@@ -10,8 +10,10 @@ class AccountsController extends BaseController {
 		try {
 			$usr = new User;
 			$usr->username = Input::get('username');
+			$usr->email = Input::get('email');
 			$usr->password = Hash::make(Input::get('password'));
-			
+			$usr->message = Input::get('message');
+			$usr->privilege = 0;
 			$usr->save();
 		}
 		catch (Exception $ex) {

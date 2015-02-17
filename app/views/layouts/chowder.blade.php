@@ -19,10 +19,11 @@
 <div class="container">	
 	<div class="menu">
 		<table><tr>
-			<td> {{ HTML::link('/', 'Home') }} </td>
+			<td>{{ HTML::link('/', 'Home') }}</td>
 			<td>{{ HTML::link('web/ticker', 'Live Feed') }}</td>
 			@yield('menu')
-			<td> {{ HTML::link('/web/accounts/logout', 'Logout') }} </td>
+			<td>{{ HTML::link('/admin', 'Admin') }}</td>
+			<td>{{ HTML::link('/web/accounts/logout', 'Logout') }}</td>
 		</tr></table>
 	</div>
 	<div class="main">

@@ -26,6 +26,18 @@ Route::group(array('prefix' => 'app'), function() {
 	
 });
 
+Route::group(array('prefix' => 'admin', 'before' => 'admin'), function() {
+	
+	Route::any('/', 'AdminController@index');
+	
+	Route::any('/newUsers', 'AdminController@newUsers');
+	
+	Route::any('/approveUser/{id}', 'AdminController@approveUser');
+	
+	Route::any('/rejectUser/{id}', 'AdminController@rejectUser');
+
+});
+
 Route::group(array('prefix' => 'web'), function() {
 	
 	Route::group(array('before' => 'auth'), function() {

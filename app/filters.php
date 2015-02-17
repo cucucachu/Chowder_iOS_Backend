@@ -46,6 +46,15 @@ Route::filter('auth', function()
 	
 });
 
+Route::filter('admin', function()
+{
+	if (Auth::guest())
+		return Redirect::guest('web/accounts/loginView');
+	
+	if (Auth::user()->privilege < 2)
+			return Response::make('Unauthorized', 401);	
+});
+
 Route::filter('approved', function()
 {
 	if (Auth::user()->privilege > 0)
@@ -55,16 +64,6 @@ Route::filter('approved', function()
 	else
 		return "Unauthorized";
 	
-});
-
-Route::filter('admin', function()
-{
-	if (Auth::user()->privilege > 1)
-	{
-		return Redirect::intended();
-	}
-	else
-		return "Unauthorized";
 });
 
 
