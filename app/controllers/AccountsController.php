@@ -56,6 +56,8 @@ class AccountsController extends BaseController {
 				return "Username and/or Password is incorrect";
 			}
 		}
+		
+		return "Bad Post";
 	}
 	
 	public function logout() {

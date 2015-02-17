@@ -15,11 +15,14 @@ Route::any('/', 'HomeController@index');
 
 Route::group(array('prefix' => 'app'), function() {
 	
-	Route::any('upload', 'UploadController@upload');
-	
 	Route::any('login', 'AccountsController@login_app');
 
 	Route::any('logout', 'AccountsController@logout');
+	
+	Route::group(array('before' => 'auth'), function() {
+	
+		Route::any('upload', 'UploadController@upload');
+	});
 	
 });
 
