@@ -6,7 +6,7 @@
 	Email:           {{ Form::text('email') }}<br>
 	Password:        {{ Form::password('password') }}<br>
 	Retype Password: {{ Form::password('password_again') }}<br><br>
-	Message:         {{ Form::textarea('message') }}<br>
+	Message:    <br> {{ Form::textarea('message') }}<br>
 	{{ Form::submit('Clam it up') }}
 	{{ Form::close() }}
 @stop

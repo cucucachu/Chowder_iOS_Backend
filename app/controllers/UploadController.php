@@ -96,6 +96,44 @@ class UploadController extends BaseController {
 		}
 	}
 	
+	public function delete() {		
+		$transects = Input::get('transects');
+		
+		foreach($transects as $transect_json) {
+			
+			$transect = Transect::where('UUID', '=', '1')
+				->where('client_timestamp', '=', $transect_json['device_created_at'])->first();
+
+			foreach($transect->sections as $section) {
+				foreach($section->clams as $clam) {
+					try {
+						$clam->delete();
+					}
+					catch (Exception $ex) {
+						echo("Could not delete clam #".$clam->id.". Exception: ".$ex->getMessage());
+					}
+				}
+				
+				try {
+					$section->delete();
+				}
+				catch (Exception $ex) {
+					echo("Could not delete section #".$section->id.". Exception: ".$ex->getMessage());
+				}
+				
+			}
+			
+			try {
+				$transect->delete();
+			}
+			catch (Exception $ex) {
+				echo("Could not delete transect. Exception: ".$ex->getMessage());
+			}
+		}
+		
+		$this->upload();
+	}
+	
 	public function test() {
 		
 		$clam = new Clam;

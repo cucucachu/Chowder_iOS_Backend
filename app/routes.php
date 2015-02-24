@@ -22,6 +22,8 @@ Route::group(array('prefix' => 'app'), function() {
 	Route::group(array('before' => 'auth'), function() {
 	
 		Route::any('upload', 'UploadController@upload');
+	
+		Route::any('deleteAndUpload', 'UploadController@delete');
 	});
 	
 });
