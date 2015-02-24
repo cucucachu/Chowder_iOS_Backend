@@ -15,7 +15,14 @@ class DisplayController extends BaseController {
 	
 	public function latest() {
 		$view = View::make('latest');
-		$view->transects = Transect::all()->sortBy('updated_at')->take(10);
+		
+		$transects = Transect::all();
+		$transects = $transects->sortByDesc(function($model) {
+			return $model->updated_at;
+		});
+		
+		$view->transects = $transects->take(10);
+		//$view->transects = Transect::all()->sortBy('updated_at')->take(10);
 		
 		return $view;
 	}
