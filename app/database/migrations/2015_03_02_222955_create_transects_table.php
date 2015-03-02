@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSectionsTable extends Migration {
+class CreateTransectsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,19 +12,16 @@ class CreateSectionsTable extends Migration {
 	 */
 	public function up()
 	{
-
-		Schema::create('sections', function(Blueprint $table) 
+		Schema::create('transects', function(Blueprint $table) 
 		{
-			$table->increments('id');			
-			$table->integer('transect_id')->unsigned();
-			$table->string('UUID');
-			$table->string('client_timestamp');
+			$table->increments('id');
+			$table->string('client_timestamp')->unique();
+			$table->integer('dig_id')->unsigned();
 			$table->double('latitude');
 			$table->double('longitude');
 			$table->double('accuracy');
 			$table->timestamps();
 			
-			$table->unique(array('UUID', 'client_timestamp'));
 		});
 	}
 
@@ -35,7 +32,7 @@ class CreateSectionsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('sections');
+		Schema::dropIfExists('transects');
 	}
 
 }

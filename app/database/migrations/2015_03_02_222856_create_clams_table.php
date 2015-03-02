@@ -15,13 +15,16 @@ class CreateClamsTable extends Migration {
 		Schema::create('clams', function(Blueprint $table) 
 		{
 			$table->increments('id');
-			$table->string('UUID');
-			$table->string('client_timestamp');
+			$table->string('client_timestamp')->unique();
 			$table->double('size')->unsigned();
-			$table->integer('section_id')->unsigned();
+			$table->integer('section_number');
+			$table->integer('transect_id')->unsigned();
+			$table->text('message');
+			$table->double('latitude');
+			$table->double('longitude');
+			$table->double('accuracy');
 			$table->timestamps();
 			
-			$table->unique(array('UUID', 'client_timestamp'));
 		});
 	}
 
