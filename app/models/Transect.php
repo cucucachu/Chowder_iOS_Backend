@@ -2,12 +2,16 @@
 
 class Transect extends Eloquent {
 	
-	public function sections() {
-		return $this->hasMany('Section');
+	public function clams() {
+		return $this->hasMany('Clam');
+	}
+	
+	public function dig() {
+		return $this->belongsTo('Dig');
 	}
 	
 	public function user() {
-		return $this->belongsTo('User');
+		return $this->dig->user;
 	}
 
 }

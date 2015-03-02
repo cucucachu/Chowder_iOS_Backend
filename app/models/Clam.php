@@ -2,12 +2,12 @@
 
 class Clam extends Eloquent {
 	
-	public function section() {
-		return $this->belongsTo('Section');
+	public function transect() {
+		return $this->belongsTo('Transect');
 	}
 	
 	public function user() {
-		return $this->belongsTo('User');
+		return $this->transect->dig->user;
 	}
 
 }
