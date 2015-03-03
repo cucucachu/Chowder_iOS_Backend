@@ -46,9 +46,21 @@ class UploadController extends BaseController {
 			
 			$coordinates = explode(',', $transect_json['coordinates']);
 			
-			$transect->latitude = $coordinates[0];
-			$transect->longitude = $coordinates[1];
-			$transect->accuracy = $coordinates[2];
+			$transect->start_latitude = $coordinates[0];
+			$transect->start_longitude = $coordinates[1];
+			$transect->start_accuracy = $coordinates[2];
+			
+			try {
+				$coordinates = explode(',', $transect_json['endCoordinates']);
+			
+				$transect->end_latitude = $coordinates[0];
+				$transect->end_longitude = $coordinates[1];
+				$transect->end_accuracy = $coordinates[2];
+			}
+			catch (Exception $ex) {
+				//end Coordinates not yet set
+			}
+			
 			
 			try {
 				$transect->save();

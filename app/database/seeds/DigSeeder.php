@@ -20,9 +20,12 @@ class DigSeeder extends Seeder {
 		$transect = new Transect;
 		$transect->client_timestamp = 'time 0';
 		$transect->dig_id = $dig->id;
-		$transect->latitude = '0';
-		$transect->longitude = '0';
-		$transect->accuracy = '0';
+		$transect->start_latitude = '0';
+		$transect->start_longitude = '0';
+		$transect->start_accuracy = '0';
+		$transect->end_latitude = '0';
+		$transect->end_longitude = '0';
+		$transect->end_accuracy = '0';
 		$transect->save();
 		
 		$clam = new Clam;
