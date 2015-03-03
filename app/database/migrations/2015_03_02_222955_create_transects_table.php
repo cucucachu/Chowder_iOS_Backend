@@ -17,6 +17,7 @@ class CreateTransectsTable extends Migration {
 			$table->increments('id');
 			$table->string('client_timestamp')->unique();
 			$table->integer('dig_id')->unsigned();
+			$table->text('note');
 			$table->double('start_latitude');
 			$table->double('start_longitude');
 			$table->double('start_accuracy');

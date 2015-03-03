@@ -15,6 +15,7 @@ class DigSeeder extends Seeder {
 		$dig->client_timestamp = 'time 0';
 		$dig->name = 'Test Dig';
 		$dig->user_id = $user->id;
+		$dig->note = "Dig note.";
 		$dig->save();
 		
 		$transect = new Transect;
@@ -26,6 +27,7 @@ class DigSeeder extends Seeder {
 		$transect->end_latitude = '0';
 		$transect->end_longitude = '0';
 		$transect->end_accuracy = '0';
+		$transect->note = "Transect note.";
 		$transect->save();
 		
 		$clam = new Clam;
@@ -33,7 +35,7 @@ class DigSeeder extends Seeder {
 		$clam->transect_id = $transect->id;
 		$clam->size = 17;
 		$clam->section_number = 0;
-		$clam->message = "This is the first test clam.";
+		$clam->note = "This is the first test clam.";
 		$clam->latitude = '0';
 		$clam->longitude = '0';
 		$clam->accuracy = '0';

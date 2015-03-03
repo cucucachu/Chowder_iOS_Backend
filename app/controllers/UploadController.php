@@ -17,6 +17,7 @@ class UploadController extends BaseController {
 		
 		$dig->client_timestamp = $client_timestamp;
 		$dig->name = Input::get('name');
+		$dig->note = Input::get('note');
 		$dig->user_id = Auth::id();
 		
 		try {
@@ -43,6 +44,7 @@ class UploadController extends BaseController {
 
 			$transect->client_timestamp = $transect_json['device_created_at'];
 			$transect->dig_id = $dig->id;
+			$transect->note = $transect_json['note'];
 			
 			$coordinates = explode(',', $transect_json['coordinates']);
 			
@@ -85,7 +87,7 @@ class UploadController extends BaseController {
 				$clam->transect_id = $transect->id;
 				$clam->section_number = $clam_json['sectionNumber'];
 				$clam->size = $clam_json['size'];
-				$clam->message = $clam_json['note'];
+				$clam->note = $clam_json['note'];
 			
 				$coordinates = explode(',', $clam_json['coordinates']);
 			

@@ -19,7 +19,7 @@ class CreateClamsTable extends Migration {
 			$table->integer('transect_id')->unsigned();
 			$table->integer('section_number');
 			$table->double('size')->unsigned();
-			$table->text('message');
+			$table->text('note');
 			$table->double('latitude');
 			$table->double('longitude');
 			$table->double('accuracy');
