@@ -5,7 +5,7 @@ class UploadController extends BaseController {
 	public function upload() {
 		$overwrite = false;
 		
-		$client_timestamp = Input::get('client_timestamp');
+		$client_timestamp = Input::get('device_created_at');
 		
 		$existing = Dig::where('user_id', '=', Auth::id())
 			->where('client_timestamp', '=', $client_timestamp)->first();
@@ -23,12 +23,12 @@ class UploadController extends BaseController {
 			$dig->save();
 		}
 		catch (Exception $ex) {
-			echo "Exception caught while saving transect.<br>";
+			echo "Exception caught while saving dig.<br>";
 			echo $ex;
 		}
 		
 		$transects = Input::get('transects');
-
+		
 		foreach($transects as $transect_json) {
 			
 			$existing = Transect::where('dig_id', '=', $dig->id)
@@ -58,7 +58,7 @@ class UploadController extends BaseController {
 				echo $ex;
 			}
 			
-			foreach($section_json['clams'] as $clam_json) {
+			foreach($transect_json['clams'] as $clam_json) {
 				$existing = Clam::where('transect_id', '=', $transect->id)
 					->where('client_timestamp', '=', $clam_json['device_created_at'])->first();
 			
@@ -71,7 +71,7 @@ class UploadController extends BaseController {
 				
 				$clam->client_timestamp = $clam_json['device_created_at'];
 				$clam->transect_id = $transect->id;
-				$clam->section_number = $clam_json['section_number'];
+				$clam->section_number = $clam_json['sectionNumber'];
 				$clam->size = $clam_json['size'];
 				$clam->message = $clam_json['note'];
 			
@@ -93,13 +93,14 @@ class UploadController extends BaseController {
 	}
 	
 	public function delete() {
-		$client_timestamp = Input::get('client_timestamp');
+		$client_timestamp = Input::get('device_created_at');
 		
 		$dig = Dig::where('user_id', '=', Auth::id())
 			->where('client_timestamp', '=', $client_timestamp)->first();
 		
-		if ($existing != NULL) 
+		if ($dig == NULL) 
 			return "Could not delete";
+		
 		
 		foreach($dig->transects as $transect) {
 			foreach($transect->clams as $clam) {
