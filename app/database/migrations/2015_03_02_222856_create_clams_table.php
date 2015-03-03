@@ -16,9 +16,9 @@ class CreateClamsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('client_timestamp')->unique();
-			$table->double('size')->unsigned();
-			$table->integer('section_number');
 			$table->integer('transect_id')->unsigned();
+			$table->integer('section_number');
+			$table->double('size')->unsigned();
 			$table->text('message');
 			$table->double('latitude');
 			$table->double('longitude');
