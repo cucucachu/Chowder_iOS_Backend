@@ -1,15 +1,19 @@
-@if (isset($transects))
-	@foreach ($transects as $i=>$t)
-		{{ "<br><h2 id='tran_$i'>Transect from ".substr($t->client_timestamp, 0, 10)." at ".substr($t->client_timestamp, 11, 8)."</h2>" }}
-		<table><tr><td><h3>Sections</h3></td><td><h3>Clams</h3></td></tr>
-		@foreach ($t->sections as $s)
+@if (isset($digs))
+	@foreach($digs as $i=>$dig)
+		<table>
+		{{ "<tr><td><h3>".$dig->name."</h3></td><td>Uploaded by <strong>".$dig->user->username."</strong> at ".substr($dig->client_timestamp, 11, 8)." on ".substr($dig->client_timestamp, 0, 10)."</td></tr>" }}
+
+		@foreach($dig->transects as $transect)
 			<tr>
-			{{ "<td><h3>".substr($s->client_timestamp, 11, 8)."</h3></td>" }}
-			@foreach ($s->clams as $clam)
-				{{ "<td><p>$clam->size mm </p></td>" }}
+			<td>Transect</td>
+			<td>
+			@foreach($transect->clams as $clam)
+					{{ "(".$clam->size." mm) " }}
 			@endforeach
-			</tr>
+			</td></tr>
 		@endforeach
 		</table>
+	
 	@endforeach
 @endif
+

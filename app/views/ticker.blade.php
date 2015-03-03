@@ -7,7 +7,7 @@
 				<p> {{ $msg }} </p>
 			@endif		
 			<br>
-			<div id='transects_table'></div>
+			<div id='digs_table'></div>
 @stop
 
 @section('script')
@@ -17,7 +17,7 @@ $(document).ready(function() {
 });
 
 function update() {
-	$('#transects_table').load('/iOS/public/web/latest');
+	$('#digs_table').load('/iOS/public/web/latest');
 	setTimeout(update, 2000);
 }
 </script>
