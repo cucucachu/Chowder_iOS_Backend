@@ -12,18 +12,20 @@ class CreateClamsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('clams', function(Blueprint $table) 
+		Schema::create('clam', function(Blueprint $table) 
 		{
-			$table->increments('id');
+			$table->integer('id')->usnigned();
 			$table->string('client_timestamp')->unique();
 			$table->integer('transect_id')->unsigned();
 			$table->integer('section_number');
-			$table->double('size')->unsigned();
-			$table->text('note');
+			$table->double('width')->unsigned();//was 'size'
+			$table->string('note', 150);
 			$table->double('latitude');
 			$table->double('longitude');
 			$table->double('accuracy');
-			$table->timestamps();
+			//$table->timestamps();
+			
+			$table->primary(array('transect_id', 'id'));
 			
 		});
 	}
@@ -35,7 +37,7 @@ class CreateClamsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('clams');
+		Schema::dropIfExists('clam');
 	}
 
 }

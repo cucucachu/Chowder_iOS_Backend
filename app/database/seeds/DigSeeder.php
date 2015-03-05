@@ -31,9 +31,10 @@ class DigSeeder extends Seeder {
 		$transect->save();
 		
 		$clam = new Clam;
+		$clam->id = 0;
 		$clam->client_timestamp = 'time 0';
 		$clam->transect_id = $transect->id;
-		$clam->size = 17;
+		$clam->width = 17;
 		$clam->section_number = 0;
 		$clam->note = "This is the first test clam.";
 		$clam->latitude = '0';

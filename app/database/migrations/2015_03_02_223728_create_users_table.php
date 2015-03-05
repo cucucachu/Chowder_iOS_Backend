@@ -12,16 +12,16 @@ class CreateUsersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('users', function(Blueprint $table)
+		Schema::create('user_ios', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('username')->unique();
 			$table->string('password');
 			$table->string('email');
 			$table->integer('privilege')->unsigned();
-			$table->string('message');
+			$table->string('message'); //Move to user_info
 			$table->string('remember_token', 100);
-			$table->timestamps();
+			$table->integer('user_info_id')->unsigned();
 		});
 	}
 
@@ -32,10 +32,6 @@ class CreateUsersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('clams');
-		Schema::dropIfExists('transects');
-		Schema::dropIfExists('digs');
-		Schema::dropIfExists('users');
 	}
 
 }

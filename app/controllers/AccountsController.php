@@ -8,13 +8,23 @@ class AccountsController extends BaseController {
 			return "Your passwords do not match";
 		
 		try {
+			$user_info = new UserInfo;
+			$user_info->username = Input::get('username');
+			$user_info->firstname = Input::get('firstname');
+			$user_info->lastname = Input::get('lastname');
+			$user_info->email = Input::get('email');
+			$user_info->message = Input::get('message');
+			$user_info->save();
+			
 			$usr = new User;
 			$usr->username = Input::get('username');
 			$usr->email = Input::get('email');
 			$usr->password = Hash::make(Input::get('password'));
 			$usr->message = Input::get('message');
 			$usr->privilege = 0;
+			$usr->user_info_id = $user_info->id;
 			$usr->save();
+			
 		}
 		catch (Exception $ex) {
 			return "Could not create user ".$usr->username."<br>".$ex->getMessage();
@@ -38,7 +48,7 @@ class AccountsController extends BaseController {
 			}
 			else {
 				$view = View::make('login');
-				$view->msg = "Username and/or Password is incorrect";
+				$view->msg = "Username and/or Password is incorrect".Hash::make(Input::get('password'));
 				return $view;
 			}
 		}

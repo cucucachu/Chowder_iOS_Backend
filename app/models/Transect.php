@@ -2,6 +2,9 @@
 
 class Transect extends Eloquent {
 	
+	protected $table = 'transect';
+	public $timestamps = false;
+	
 	public function clams() {
 		return $this->hasMany('Clam');
 	}

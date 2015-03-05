@@ -18,7 +18,7 @@ class DisplayController extends BaseController {
 		
 		$digs = Dig::all();
 		$digs = $digs->sortByDesc(function($model) {
-			return $model->updated_at;
+			return $model->id;
 		});
 		
 		$view->digs = $digs->take(10);

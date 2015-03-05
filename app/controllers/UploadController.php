@@ -72,6 +72,8 @@ class UploadController extends BaseController {
 				echo $ex;
 			}
 			
+			$clam_number = 1;
+			
 			foreach($transect_json['clams'] as $clam_json) {
 				$existing = Clam::where('transect_id', '=', $transect->id)
 					->where('client_timestamp', '=', $clam_json['device_created_at'])->first();
@@ -83,10 +85,12 @@ class UploadController extends BaseController {
 					$clam = new Clam;
 				}
 				
+				$clam->id = $clam_number++;
+				
 				$clam->client_timestamp = $clam_json['device_created_at'];
 				$clam->transect_id = $transect->id;
 				$clam->section_number = $clam_json['sectionNumber'];
-				$clam->size = $clam_json['size'];
+				$clam->width = $clam_json['size'];
 				$clam->note = $clam_json['note'];
 			
 				$coordinates = explode(',', $clam_json['coordinates']);

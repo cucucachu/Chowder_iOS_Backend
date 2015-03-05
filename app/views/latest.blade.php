@@ -8,7 +8,7 @@
 			{{ "<td>Transect ".($number+1)." </td>" }}
 			<td>
 			@foreach($transect->clams as $clam)
-					{{ "(".$clam->size." mm) " }}
+					{{ "(".$clam->width." mm) " }}
 			@endforeach
 			</td></tr>
 		@endforeach

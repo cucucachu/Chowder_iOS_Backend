@@ -12,13 +12,13 @@ class CreateDigsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('digs', function(Blueprint $table) {
+		Schema::create('dig', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('client_timestamp');
-			$table->text('note');
-			$table->string('name');
+			$table->string('note', 150);
+			$table->string('name', 40);
 			$table->integer('user_id')->unsigned();
-			$table->timestamps();
+			//$table->timestamps();
 			
 			$table->unique(array('user_id', 'client_timestamp'));
 		});
@@ -31,7 +31,7 @@ class CreateDigsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('digs');
+		Schema::dropIfExists('dig');
 	}
 
 }

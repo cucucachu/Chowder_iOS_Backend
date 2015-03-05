@@ -12,19 +12,19 @@ class CreateTransectsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('transects', function(Blueprint $table) 
+		Schema::create('transect', function(Blueprint $table) 
 		{
 			$table->increments('id');
-			$table->string('client_timestamp')->unique();
+			$table->string('client_timestamp')->unique(); //datetime
 			$table->integer('dig_id')->unsigned();
-			$table->text('note');
+			$table->string('note', 150);
 			$table->double('start_latitude');
 			$table->double('start_longitude');
 			$table->double('start_accuracy');
 			$table->double('end_latitude');
 			$table->double('end_longitude');
 			$table->double('end_accuracy');
-			$table->timestamps();
+			//$table->timestamps();
 			
 		});
 	}
@@ -36,7 +36,7 @@ class CreateTransectsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('transects');
+		Schema::dropIfExists('transect');
 	}
 
 }
