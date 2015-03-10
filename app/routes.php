@@ -26,7 +26,7 @@ Route::group(array('prefix' => 'app'), function() {
 		Route::any('deleteAndUpload', 'UploadController@delete');
 	});
 	
-	Route::any('android/login', AccountsController@login_android);
+	Route::any('android/login', 'AccountsController@login_android');
 	
 });
 
