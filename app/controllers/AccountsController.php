@@ -64,6 +64,18 @@ class AccountsController extends BaseController {
 		return "false";
 	}
 	
+	public function login_android() {
+		$username = Input::get('username');
+		$password = Input::get('password');
+		
+		$user = User::where("username", '=', $username);
+		
+		if (Auth::attempt(array('username' => $username, 'password' => $password)))
+			return "Success".$user->id;
+		
+		return "false";
+	}
+	
 	public function logout() {
 		Auth::logout();
 		return Redirect::to('/');

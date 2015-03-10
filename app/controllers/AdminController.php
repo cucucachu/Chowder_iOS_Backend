@@ -25,6 +25,21 @@ class AdminController extends BaseController {
 		$user->delete();
 		return $this->newUsers();
 	}
+	
+	public function clamCSV() {
+		$clams = Clam::all();
+		$csv = "ID, Lat, Long, Width";
+		
+		foreach ($clams as $clam) {
+			$csv = $csv."<br>\n";
+			$csv = $csv."".$clam->id;
+			$csv = $csv.", ".$clam->latitude;
+			$csv = $csv.", ".$clam->longitude;
+			$csv = $csv.", ".$clam->width;
+		}
+		
+		return $csv;
+	}
 }
 
 ?>

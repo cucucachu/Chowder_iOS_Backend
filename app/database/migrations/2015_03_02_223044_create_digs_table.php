@@ -14,7 +14,7 @@ class CreateDigsTable extends Migration {
 	{
 		Schema::create('dig', function(Blueprint $table) {
 			$table->increments('id');
-			$table->string('client_timestamp');
+			$table->dateTime('client_timestamp');
 			$table->string('note', 150);
 			$table->string('name', 40);
 			$table->integer('user_id')->unsigned();

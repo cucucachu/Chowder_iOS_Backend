@@ -15,7 +15,7 @@ class CreateClamsTable extends Migration {
 		Schema::create('clam', function(Blueprint $table) 
 		{
 			$table->integer('id')->usnigned();
-			$table->string('client_timestamp')->unique();
+			$table->dateTime('client_timestamp')->unique();
 			$table->integer('transect_id')->unsigned();
 			$table->integer('section_number');
 			$table->double('width')->unsigned();//was 'size'
@@ -23,7 +23,6 @@ class CreateClamsTable extends Migration {
 			$table->double('latitude');
 			$table->double('longitude');
 			$table->double('accuracy');
-			//$table->timestamps();
 			
 			$table->primary(array('transect_id', 'id'));
 			

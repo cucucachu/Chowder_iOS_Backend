@@ -15,7 +15,7 @@ class CreateTransectsTable extends Migration {
 		Schema::create('transect', function(Blueprint $table) 
 		{
 			$table->increments('id');
-			$table->string('client_timestamp')->unique(); //datetime
+			$table->dateTime('client_timestamp')->unique(); //datetime
 			$table->integer('dig_id')->unsigned();
 			$table->string('note', 150);
 			$table->double('start_latitude');

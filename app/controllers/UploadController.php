@@ -5,7 +5,7 @@ class UploadController extends BaseController {
 	public function upload() {
 		$overwrite = false;
 		
-		$client_timestamp = Input::get('device_created_at');
+		$client_timestamp = DATE('Y-m-d H:i:s', strtotime(Input::get('device_created_at')));
 		
 		$existing = Dig::where('user_id', '=', Auth::id())
 			->where('client_timestamp', '=', $client_timestamp)->first();
@@ -32,8 +32,10 @@ class UploadController extends BaseController {
 		
 		foreach($transects as $transect_json) {
 			
+			$client_timestamp = DATE('Y-m-d H:i:s', strtotime($transect_json['device_created_at']));
+			
 			$existing = Transect::where('dig_id', '=', $dig->id)
-				->where('client_timestamp', '=', $transect_json['device_created_at'])->first();
+				->where('client_timestamp', '=', $client_timestamp)->first();
 			
 			if ($existing != NULL) {
 				$transect = $existing;
@@ -63,7 +65,6 @@ class UploadController extends BaseController {
 				//end Coordinates not yet set
 			}
 			
-			
 			try {
 				$transect->save();
 			}
@@ -75,8 +76,10 @@ class UploadController extends BaseController {
 			$clam_number = 1;
 			
 			foreach($transect_json['clams'] as $clam_json) {
+				$client_timestamp = DATE('Y-m-d H:i:s', strtotime($clam_json['device_created_at']));
+				
 				$existing = Clam::where('transect_id', '=', $transect->id)
-					->where('client_timestamp', '=', $clam_json['device_created_at'])->first();
+					->where('client_timestamp', '=', $client_timestamp)->first();
 			
 				if ($existing != NULL) {
 					$clam = $existing;
