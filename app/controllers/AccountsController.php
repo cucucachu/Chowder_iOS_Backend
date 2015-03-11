@@ -8,21 +8,15 @@ class AccountsController extends BaseController {
 			return "Your passwords do not match";
 		
 		try {
-			$user_info = new UserInfo;
-			$user_info->username = Input::get('username');
-			$user_info->firstname = Input::get('firstname');
-			$user_info->lastname = Input::get('lastname');
-			$user_info->email = Input::get('email');
-			$user_info->message = Input::get('message');
-			$user_info->save();
 			
 			$usr = new User;
 			$usr->username = Input::get('username');
 			$usr->email = Input::get('email');
-			$usr->password = Hash::make(Input::get('password'));
 			$usr->message = Input::get('message');
+			$usr->firstname = Input::get('firstname');
+			$usr->lastname = Input::get('lastname');
+			$usr->password = Hash::make(Input::get('password'));
 			$usr->privilege = 0;
-			$usr->user_info_id = $user_info->id;
 			$usr->save();
 			
 		}
@@ -68,7 +62,7 @@ class AccountsController extends BaseController {
 		$username = Input::get('username');
 		$password = Input::get('password');
 		
-		$user = User::where("username", '=', $username);
+		$user = User::where('username', '=', $username)->first();
 		
 		if (Auth::attempt(array('username' => $username, 'password' => $password)))
 			return "Success".$user->id;

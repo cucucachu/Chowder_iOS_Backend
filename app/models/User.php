@@ -14,7 +14,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 *
 	 * @var string
 	 */
-	protected $table = 'user_ios';
+	protected $table = 'user';
 	public $timestamps = false;
 
 	/**
@@ -26,10 +26,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	
 	public function digs() {
 		return $this->hasMany('Dig');
-	}
-	
-	public function user_info() {
-		return $this->belongsTo('UserInfo');
 	}
 
 }

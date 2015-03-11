@@ -24,12 +24,9 @@ class CreateTableRelationships extends Migration {
 		
 		Schema::table('dig', function($table)
 		{
-			$table->foreign('user_id')->references('id')->on('user_ios');
+			$table->foreign('user_id')->references('id')->on('user');
 		});
 		
-		Schema::table('user_ios', function($table) {
-			$table->foreign('user_info_id')->references('id')->on('user_info');
-		});
 	}
 
 	/**

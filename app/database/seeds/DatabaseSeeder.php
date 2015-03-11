@@ -14,8 +14,7 @@ class DatabaseSeeder extends Seeder {
 		DB::table('clam')->delete();
 		DB::table('transect')->delete();
 		DB::table('dig')->delete();
-		DB::table('user_ios')->delete();
-		DB::table('user_info')->delete();
+		DB::table('user')->delete();
 
 
 		$this->call('UserTableSeeder');

@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'chowderiOS',
-			'username'  => 'chowderiOS',
-			'password'  => 'chowderiOS',
+			'database'  => 'chowder',
+			'username'  => 'chowder',
+			'password'  => 'chowder',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
