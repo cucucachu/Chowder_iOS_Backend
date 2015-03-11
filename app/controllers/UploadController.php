@@ -44,7 +44,7 @@ class UploadController extends BaseController {
 				$transect = new Transect;
 			}
 
-			$transect->client_timestamp = $transect_json['device_created_at'];
+			$transect->client_timestamp = $client_timestamp;
 			$transect->dig_id = $dig->id;
 			$transect->note = $transect_json['note'];
 			
@@ -75,7 +75,22 @@ class UploadController extends BaseController {
 			
 			$clam_number = 1;
 			
+			// Delete old clams to avoid database collisions
 			foreach($transect_json['clams'] as $clam_json) {
+			
+				$client_timestamp = DATE('Y-m-d H:i:s', strtotime($clam_json['device_created_at']));
+				
+				$existing = Clam::where('transect_id', '=', $transect->id)
+					->where('client_timestamp', '=', $client_timestamp)->first();
+			
+				if ($existing != NULL) {
+					DB::unprepared('DELETE FROM clam where (transect_id, id) IN (('.$existing->transect_id.', '.$existing->id.'));');
+				}
+			}
+			
+			// Add all clams
+			foreach($transect_json['clams'] as $clam_json) {
+			
 				$client_timestamp = DATE('Y-m-d H:i:s', strtotime($clam_json['device_created_at']));
 				
 				$existing = Clam::where('transect_id', '=', $transect->id)
@@ -90,7 +105,7 @@ class UploadController extends BaseController {
 				
 				$clam->id = $clam_number++;
 				
-				$clam->client_timestamp = $clam_json['device_created_at'];
+				$clam->client_timestamp = $client_timestamp;
 				$clam->transect_id = $transect->id;
 				$clam->section_number = $clam_json['sectionNumber'];
 				$clam->width = $clam_json['size'];
@@ -103,7 +118,11 @@ class UploadController extends BaseController {
 				$clam->accuracy = $coordinates[2];
 				
 				try {
-					$clam->save();
+					//$clam->save();
+					$query = 'INSERT INTO clam (id, client_timestamp, transect_id, section_number, width, note, latitude, longitude, accuracy) VALUES (\''.$clam->id.'\',
+						\''.$clam->client_timestamp.'\', \''.$clam->transect_id.'\', \''.$clam->section_number.'\', \''.$clam->width.'\', \''.$clam->note.'\', 
+						\''.$clam->latitude.'\', \''.$clam->longitude.'\', \''.$clam->accuracy.'\');';
+					DB::unprepared($query);
 				}
 				catch (Exception $ex) {
 					echo "Caught exception when saving clam.<br>";
@@ -114,7 +133,7 @@ class UploadController extends BaseController {
 	}
 	
 	public function delete() {
-		$client_timestamp = Input::get('device_created_at');
+		$client_timestamp = DATE('Y-m-d H:i:s', strtotime(Input::get('device_created_at')));;
 		
 		$dig = Dig::where('user_id', '=', Auth::id())
 			->where('client_timestamp', '=', $client_timestamp)->first();
@@ -125,7 +144,9 @@ class UploadController extends BaseController {
 		
 		foreach($dig->transects as $transect) {
 			foreach($transect->clams as $clam) {
-				$clam->delete();
+				//$clam->delete();
+				DB::unprepared('DELETE FROM clam where (transect_id, id) IN (('.$clam->transect_id.', '.$clam->id.'));');
+				echo("!!!!!!!!!!!!!Deleting clam $clam->transect_id\-$clam->id");
 			}
 			$transect->delete();
 		}
