@@ -2,20 +2,19 @@
 
 @section('content')
 
-<h2>Welcome to Chowder</h2><br>
+<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+	<h2 style=" text-align: center; ">Welcome to Chowder!</h2><br>
+</div>
 
-<p>Chowder is a mobile app which helps citizen scientists contribute to a survey of the pismo clam population. Sign up and help science today!</p>
+<div class="col-xs-12 col-sm-8 col-sm-offset-2">
+<div class="panel">
+<div class="panel-body">
+	<p>Chowder is a mobile app which helps citizen scientists contribute to a survey of the pismo clam population. Sign up and help science today!</p>
 
-@if (Auth::guest())
-	<h3>Please dive in!</h3><br>
+	<br><p> New user? Come jump into a warm pot of {{ HTML::link('web/accounts/newView', 'Chowder!') }}</p>
+</div>
+</div>
+</div>
 
-	{{ Form::open(array('url' => '/web/accounts/login')) }}
-	{{ Form::label('Username ') }}{{ Form::text('username') }}<br>
-	{{ Form::label('Password ') }}{{ Form::password('password') }}<br>
-	{{ Form::submit('Dive in') }}<br>
-	{{ Form::close() }}
-@endif
-
-<br><p> New user? Come jump into a warm pot of {{ HTML::link('web/accounts/newView', 'Chowder!') }}</p>
 
 @stop

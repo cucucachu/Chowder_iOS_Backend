@@ -17,7 +17,7 @@ $(document).ready(function() {
 });
 
 function update() {
-	$('#digs_table').load('/iOS/public/web/latest');
+	$('#digs_table').load('/web/latest');
 	setTimeout(update, 2000);
 }
 </script>
